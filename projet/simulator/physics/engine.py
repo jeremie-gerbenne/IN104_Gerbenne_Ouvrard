@@ -25,6 +25,25 @@ class IEngine:
                 [vx1, vy1, vx2, vy2, ..., vxn, vyn, ax1, ay1, ax2, ay2, ..., axn, ayn]
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
+        n = len(y0)/4
+        for i in range(n):
+            y0[2*i]=y0[2*i+2*n]
+            y0[2*i+1]=y0[2*i+1+2*n]
+            force = Vector2(0,0)
+            corps_i = self.world.get(i)
+            pos_i = corps_i.pos
+            mass_i = corps_i.mass
+            for j in range(n):
+                if i!=j:
+                    corps_j = self.world.get(j)
+                    pos_j = corps_j.pos
+                    mass_j = corps_j.mass
+                    Fij = gravitational_force(pos_i,mass_i,pos_j,mass_j)
+                    force = Vector.add(force,Fij)
+            y0[2*i+2*n] = Vector2.get_x(force)
+            y0[2*i+1+2*n] = Vector2.get_y(force)
+        return y0
+        
         raise NotImplementedError
 
     def make_solver_state(self):
