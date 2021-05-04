@@ -57,6 +57,20 @@ class IEngine:
                 [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
             where xi, yi are the positions and vxi, vyi are the velocities.
         """
+                n = len(self.world)
+        y = []
+        for i in range(n) : 
+            corps_i = self.world.get(i)
+            pos_i = corps_i.pos
+            y.append(Vector2.get_x(pos_i))
+            y.append(Vector2.get_y(pos_i))
+        
+        for i in range(n) :
+            corps_i = self.world.get(i)
+            vel_i = corps_i.velocity
+            y.append(Vector2.get_x(vel_i))
+            y.append(Vector2.get_y(vel_i))
+        
         raise NotImplementedError
 
 
