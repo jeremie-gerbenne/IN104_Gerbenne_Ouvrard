@@ -24,6 +24,13 @@ class ISolver:
             throughout the execution of the program.
             Return the new state at time t.
         """
+        
+        t_cur = self.t0
+        y = self.y0
+        while t_cur < t:
+            y = y + self.max_step_size * self.f(t_cur, y)
+            t_cur += self.max_step_size
+        return y
         raise NotImplementedError
 
 
