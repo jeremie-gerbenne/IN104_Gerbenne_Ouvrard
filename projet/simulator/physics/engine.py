@@ -6,6 +6,9 @@ def gravitational_force(pos1, mass1, pos2, mass2):
     """ Return the force applied to a body in pos1 with mass1
         by a body in pos2 with mass2
     """
+    u_12 = pos2-pos1
+    r = Vector.norm(u_12)
+    return u_12*G*mass1*mass2/r**3
     raise NotImplementedError
 
 
