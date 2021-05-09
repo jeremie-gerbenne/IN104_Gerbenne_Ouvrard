@@ -61,13 +61,13 @@ class Screen:
         self._screen.blit(s, s.get_rect())
 
         draw_text(self._screen, self._font, "Frame: %s" % self.frame,
-                  Vector2(0, 0), (255, 255, 255))
+                  Vector2(0, 0), True,(255, 255, 255),"northwest")
         draw_text(self._screen, self._font, "Mouse position: %s" % self.mouse_position,
-                  Vector2(0, 12), (255, 255, 255))
+                  Vector2(0, 12), True, (255, 255, 255),"northwest")
         draw_text(self._screen, self._font, "Buttons: %s" % self._buttons,
-                  Vector2(0, 24), (255, 255, 255))
+                  Vector2(0, 24), True,(255, 255, 255),"northwest")
         draw_text(self._screen, self._font, "Should quit: %s" % self.should_quit,
-                  Vector2(0, 36), (255, 255, 255))
+                  Vector2(0, 36), True,(255, 255, 255),"northwest")
 
     def tick(self, fps):
         self.clock.tick(fps)
@@ -88,7 +88,7 @@ class Screen:
 
     def draw_corner_text(self, s):
         draw_text(self._screen, self._font, s,
-                  Vector2(0, self.screen_size.get_y() - 12), (255, 255, 255))
+                  Vector2(0, self.screen_size.get_y() - 12), True,(255, 255, 255))
 
     def get_left_mouse(self): return self._buttons[0]
     def get_middle_mouse(self): return self._buttons[1]
