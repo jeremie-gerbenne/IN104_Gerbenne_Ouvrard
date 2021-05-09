@@ -18,7 +18,7 @@ class Camera:
         y_c = self.position.get_y()
         x_s = x_s_max/2+(x_w-x_c)*scale
         y_s = y_s_max/2+(y_w-y_c)*scale
-        return Vector2(x_s,y_s)
+        return Vector2(int(x_s),int(y_s))
 
     def from_screen_coords(self, position):
         """ Converts the screen-coordinate position to a world-coordinate. """
