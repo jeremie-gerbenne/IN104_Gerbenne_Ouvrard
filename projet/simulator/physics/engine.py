@@ -57,11 +57,11 @@ class IEngine:
                 [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
             where xi, yi are the positions and vxi, vyi are the velocities.
         """
-                n = len(self.world)
+        n = len(self.world)
         y = []
         for i in range(n) : 
             corps_i = self.world.get(i)
-            pos_i = corps_i.pos
+            pos_i = corps_i.position
             y.append(Vector2.get_x(pos_i))
             y.append(Vector2.get_y(pos_i))
         
