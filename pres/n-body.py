@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
         for i in range(len(bodiesX)):
             pg.draw.circle(screen, (255, 255, 255),
-                           (bodiesX[i], bodiesY[i]), 10, 0)
+                           (int(bodiesX[i]), int(bodiesY[i])), 10, 0)
 
         pg.display.update()
 
