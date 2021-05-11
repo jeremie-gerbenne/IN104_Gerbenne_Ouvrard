@@ -85,3 +85,42 @@ class DummyEngine(IEngine):
             y[2*n+2*i] = Vector2.get_x(vel_i)
             y[2*n+2*i+1] = Vector2.get_y(vel_i)
         return y
+
+class LessDummyEngine(IEngine):
+    def derivatives(self, t0, y0):
+        n = len(y0)/4
+        n = int(n)
+        y = Vector(4*n)
+        for i in range(n):
+            y[2*i]=y0[2*i+2*n]
+            y[2*i+1]=y0[2*i+1+2*n]
+            force = Vector2(0,0)
+            corps_i = self.world.get(i)
+            pos_i = corps_i.position
+            mass_i = corps_i.mass
+            for j in range(i+1,n):
+                corps_j = self.world.get(j)
+                pos_j = corps_j.position
+                mass_j = corps_j.mass
+                Fij = gravitational_force(pos_i,mass_i,pos_j,mass_j)
+                y[2*n+2*i] = Vector2.get_x(Fij)/mass_i
+                y[2*i+1+2*n] = Vector2.get_y(Fij)/mass_i
+                y[2*n+2*j] = Vector2.get_x(-1*Fij)/mass_j
+                y[2*j+1+2*n] = Vector2.get_y(-1*Fij)/mass_j
+        return y
+
+    def make_solver_state(self):
+        n = len(self.world)
+        y = Vector(4*n)
+        for i in range(n) :
+            corps_i = self.world.get(i)
+            pos_i = corps_i.position
+            y[2*i] = Vector2.get_x(pos_i)
+            y[2*i+1] = Vector2.get_y(pos_i)
+
+        for i in range(n) :
+            corps_i = self.world.get(i)
+            vel_i = corps_i.velocity
+            y[2*n+2*i] = Vector2.get_x(vel_i)
+            y[2*n+2*i+1] = Vector2.get_y(vel_i)
+        return y
