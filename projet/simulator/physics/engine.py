@@ -31,9 +31,10 @@ class IEngine:
 
         n = len(y0)/4
         n = int(n)
+        y = Vector(4*n)
         for i in range(n):
-            y0[2*i]=y0[2*i+2*n]
-            y0[2*i+1]=y0[2*i+1+2*n]
+            y[2*i]=y0[2*i+2*n]
+            y[2*i+1]=y0[2*i+1+2*n]
             force = Vector2(0,0)
             corps_i = self.world.get(i)
             pos_i = corps_i.position
@@ -45,9 +46,10 @@ class IEngine:
                     mass_j = corps_j.mass
                     Fij = gravitational_force(pos_i,mass_i,pos_j,mass_j)
                     force = force + Fij
-            y0[2*i+2*n] = Vector2.get_x(force)
-            y0[2*i+1+2*n] = Vector2.get_y(force)
-        return y0
+            y[2*i+2*n] = Vector2.get_x(force)/mass_i
+            y[2*i+1+2*n] = Vector2.get_y(force)/mass_i
+        return y
+
 
 
 
