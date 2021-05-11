@@ -29,6 +29,26 @@ class IEngine:
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
 
+        raise NotImplementedError
+
+
+
+    def make_solver_state(self):
+        """ Returns the state given to the solver, it is the vector y in
+                y' = f(t, y)
+            In our case, it is the vector containing the
+            positions and speeds of all our bodies:
+                [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
+            where xi, yi are the positions and vxi, vyi are the velocities.
+        """
+
+        raise NotImplementedError
+
+
+
+class DummyEngine(IEngine):
+
+    def derivatives(self, t0, y0):
         n = len(y0)/4
         n = int(n)
         y = Vector(4*n)
@@ -50,17 +70,7 @@ class IEngine:
             y[2*i+1+2*n] = Vector2.get_y(force)/mass_i
         return y
 
-
-
-
     def make_solver_state(self):
-        """ Returns the state given to the solver, it is the vector y in
-                y' = f(t, y)
-            In our case, it is the vector containing the
-            positions and speeds of all our bodies:
-                [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
-            where xi, yi are the positions and vxi, vyi are the velocities.
-        """
         n = len(self.world)
         y = Vector(4*n)
         for i in range(n) :
@@ -74,11 +84,4 @@ class IEngine:
             vel_i = corps_i.velocity
             y[2*n+2*i] = Vector2.get_x(vel_i)
             y[2*n+2*i+1] = Vector2.get_y(vel_i)
-        return(y)
-
-
-
-
-class DummyEngine(IEngine):
-    pass
-
+        return y
