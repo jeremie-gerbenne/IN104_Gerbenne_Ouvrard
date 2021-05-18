@@ -24,12 +24,13 @@ class ISolver:
             throughout the execution of the program.
             Return the new state at time t.
         """
-        
         t_cur = self.t0
         y = self.y0
+        max_s_s =self.max_step_size
+        dt = (t-t_cur)/(int((t-t_cur)/max_s_s)+1)
         while t_cur < t:
-            y = y + self.max_step_size * self.f(t_cur, y)
-            t_cur += self.max_step_size
+            y = y + dt * self.f(t_cur, y)
+            t_cur += dt
         self.t0 = t
         self.y0 = y
         return y
