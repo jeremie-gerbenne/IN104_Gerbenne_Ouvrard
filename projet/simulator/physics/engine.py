@@ -57,12 +57,12 @@ class DummyEngine(IEngine):
             y[2*i+1]=y0[2*i+1+2*n]
             force = Vector2(0,0)
             corps_i = self.world.get(i)
-            pos_i = corps_i.position
+            pos_i = Vector2(y0[2*i],y0[2*i+1])
             mass_i = corps_i.mass
             for j in range(n):
                 if i!=j:
                     corps_j = self.world.get(j)
-                    pos_j = corps_j.position
+                    pos_j = Vector2(y0[2*j],y0[2*j+1])
                     mass_j = corps_j.mass
                     Fij = gravitational_force(pos_i,mass_i,pos_j,mass_j)
                     force = force + Fij
