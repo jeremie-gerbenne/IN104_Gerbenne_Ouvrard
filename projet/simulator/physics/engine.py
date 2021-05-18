@@ -87,6 +87,7 @@ class DummyEngine(IEngine):
         return y
 
 class LessDummyEngine(IEngine):
+    """Permet de diminuer le nombre de calculs par deux, en utilisant le fait que Fij=-Fji"""
     def derivatives(self, t0, y0):
         n = len(y0)/4
         n = int(n)
@@ -96,17 +97,17 @@ class LessDummyEngine(IEngine):
             y[2*i+1]=y0[2*i+1+2*n]
             force = Vector2(0,0)
             corps_i = self.world.get(i)
-            pos_i = corps_i.position
+            pos_i = Vector2(y0[2*i],y0[2*i+1])
             mass_i = corps_i.mass
             for j in range(i+1,n):
                 corps_j = self.world.get(j)
-                pos_j = corps_j.position
+                pos_j = Vector2(y0[2*j],y0[2*j+1])
                 mass_j = corps_j.mass
                 Fij = gravitational_force(pos_i,mass_i,pos_j,mass_j)
-                y[2*n+2*i] = Vector2.get_x(Fij)/mass_i
-                y[2*i+1+2*n] = Vector2.get_y(Fij)/mass_i
-                y[2*n+2*j] = Vector2.get_x(-1*Fij)/mass_j
-                y[2*j+1+2*n] = Vector2.get_y(-1*Fij)/mass_j
+                y[2*n+2*i] += Vector2.get_x(Fij)/mass_i
+                y[2*i+1+2*n] += Vector2.get_y(Fij)/mass_i
+                y[2*n+2*j] += Vector2.get_x(-1*Fij)/mass_j
+                y[2*j+1+2*n] += Vector2.get_y(-1*Fij)/mass_j
         return y
 
     def make_solver_state(self):
