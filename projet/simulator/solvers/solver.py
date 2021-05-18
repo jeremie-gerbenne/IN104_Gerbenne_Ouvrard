@@ -30,6 +30,8 @@ class ISolver:
         while t_cur < t:
             y = y + self.max_step_size * self.f(t_cur, y)
             t_cur += self.max_step_size
+        self.t0 = t
+        self.y0 = y
         return y
         raise NotImplementedError
 
