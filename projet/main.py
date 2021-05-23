@@ -2,7 +2,7 @@
 
 from simulator import Simulator, World, Body
 from simulator.utils.vector import Vector2
-from simulator.solvers import DummySolver
+from simulator.solvers.solver import DummySolver
 from simulator.physics.engine import DummyEngine
 from simulator.graphics import Screen
 
