@@ -9,7 +9,7 @@ def gravitational_force(pos1, mass1, pos2, mass2):
     u_12 = pos2-pos1
     r = Vector.norm(u_12)
     return u_12*G*mass1*mass2/r**3
-    raise NotImplementedError
+    
 
 
 class IEngine:
@@ -29,7 +29,7 @@ class IEngine:
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
 
-        raise NotImplementedError
+        
 
 
 
@@ -42,7 +42,7 @@ class IEngine:
             where xi, yi are the positions and vxi, vyi are the velocities.
         """
 
-        raise NotImplementedError
+        
 
 
 
