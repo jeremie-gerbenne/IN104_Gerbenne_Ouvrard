@@ -27,7 +27,7 @@ class ISolver:
             Return the new state at time t."""
 
 
-        raise NotImplementedError
+        
 
 
 class DummySolver(ISolver):
@@ -49,7 +49,7 @@ class DummySolver(ISolver):
         self.t0 = t
         self.y0 = y
         return y
-        raise NotImplementedError
+        
 
     pass
 
@@ -87,6 +87,6 @@ class LessDummySolver(ISolver):
         self.t0 = t
         self.y0 = ynew
         return ynew
-        raise NotImplementedError
+        
     pass
 
